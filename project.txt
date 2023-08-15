@@ -20,9 +20,6 @@ byte Name4[4]={0x90,0xED,0x29,0x22};//second UID card
 int NumbCard[2];//this array content the number of cards. in my case i have just two cards.
 int j=0;        
 
-int const RedLed=6;
-int const GreenLed=5;
-int const Buzzer=8;
 
 String Name;//user name
 String USN;//user number
@@ -58,8 +55,8 @@ void loop()
      card_ID[i]=mfrc522.uid.uidByte[i];
 
        if(card_ID[i]==Name1[i]){
-       Name="Aditya Dubey";//user name
-       USN="1SI20ET002";//user number
+       Name="Rohit Kumar";//user name
+       USN="1SI20ET037";//user number
        j=0;//first number in the NumbCard array : NumbCard[j]
       }
       else if(card_ID[i]==Name2[i]){
@@ -78,13 +75,12 @@ void loop()
        j=3;//Second number in the NumbCard array : NumbCard[j]
       }
       else{
-          digitalWrite(GreenLed,LOW);
-          digitalWrite(RedLed,HIGH);
-          goto cont;//go directly to line 85
+        
+          goto cont;
      }
 }
       if(NumbCard[j] == 1){//to check if the card already detect
-      //if you want to use LCD
+   
       //Serial.println("Already Exist");
       }
       else{
@@ -93,18 +89,15 @@ void loop()
       Serial.print("DATA,DATE,TIME," + Name);//send the Name to excel
       Serial.print(",");
       Serial.println(USN); //send the Number to excel
-      digitalWrite(GreenLed,HIGH);
-      digitalWrite(RedLed,LOW);
-      digitalWrite(Buzzer,HIGH);
+   
       delay(30);
-      digitalWrite(Buzzer,LOW);
+
       Serial.println("SAVEWORKBOOKAS,Names/WorkNames");
       }
       delay(1000);
 cont:
 delay(2000);
-digitalWrite(GreenLed,LOW);
-digitalWrite(RedLed,LOW);
+
 
 //if you want to close the Excel when all card had detected and save Excel file in Names Folder. in my case i have just 2 card (optional)
 //if(n==2){
